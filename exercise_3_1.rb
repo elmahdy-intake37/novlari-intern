@@ -22,8 +22,10 @@ class Document
     self.content = params[:content]
   end
   def +(exsec)
+    if exsec.is_a? String
     Document.new author: self.author, title: self.title, content: self.content + exsec
-
+  elsif
+    Document.new author: self.author, title: self.title, content: self.content
   end
 end
 
