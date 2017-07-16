@@ -14,5 +14,11 @@
 
 
 class Document
-end
+  attr_accessor :author, :title, :content, :exsec
+  def initialize(params = {})
+    self.author = params[:author]
+    self.title = params[:title]
+    self.content = params[:content]
+  end
 
+end
