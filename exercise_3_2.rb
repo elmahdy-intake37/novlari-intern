@@ -20,5 +20,27 @@ class Document
     self.title = params[:title]
     self.content = params[:content]
   end
+    def +(exsec)
+      if exsec.is_a? String
+        Document.new author: self.author, title: self.title, content: self.content + exsec
+      else
+        Document.new author: self.author, title: self.title, content: self.content + exsec+content
+      end
+    end
+    def words
+      @content.split(" ")
+    end
+    def each_word
+      self.each_word do | word |
+        yield word
+    end
+  end
+end
 
+
+
+a=Document.new(:author => "someone", :title => "my book", :content => "this is the content of my book")
+a.words
+a.each_word do | word |
+ puts word
 end

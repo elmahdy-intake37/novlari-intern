@@ -25,7 +25,7 @@ class Document
     if exsec.is_a? String
     Document.new author: self.author, title: self.title, content: self.content + exsec
   elsif
-    Document.new author: self.author, title: self.title, content: self.content
+    Document.new author: self.author, title: self.title, content: self.content + exsec+content
   end
 end
 
