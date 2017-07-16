@@ -19,11 +19,34 @@
 require 'time'
 
 module Generic
-   
+   def Generic.current_date
+     "{Time.now.year}-{Time.now.month}-{Time.now.day}"
+   end
 end
 
 
 class Document
-    
+  attr_accessor :author, :title, :content, :exsec
+  def initialize(params = {})
+    self.author = params[:author]
+    self.title = params[:title]
+    self.content = params[:content]
+  end
+  def title_with_date
+    "#{self.title} #{Generic.current_date}"
+  end
+    def replace_word old_word,  new_word
+    self.content.gsub! old_word, new_word
+    end
+    def method_missing method_name, new_word
+        old_word = method_name.to_s.split("_")[-1]
+        self.send("replace_word", old_word, new_word)
+    end
+
 end
 
+
+a=Document.new(:author => "someone", :title => "my book", :content => "this is the content of my book")
+a.title_with_date
+a.replace_word "tests", "test2"
+a.replace_content('pen')
